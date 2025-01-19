@@ -8,6 +8,8 @@ public class JDBC_HotalRejervationSystem {
         }
         catch (ClassNotFoundException e){
             System.out.println(e);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         int number;
         do {

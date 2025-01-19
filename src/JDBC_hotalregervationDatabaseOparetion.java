@@ -1,14 +1,19 @@
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class JDBC_hotalregervationDatabaseOparetion {
     private Statement stam;
     private Connection con;
     private Scanner sc=new Scanner(System.in);
-    JDBC_hotalregervationDatabaseOparetion() throws ClassNotFoundException{
-        String url="jdbc:mysql://localhost:3306/hotalDb";
-        String userName = "root";
-        String password = "nevermind";
+    JDBC_hotalregervationDatabaseOparetion() throws ClassNotFoundException,SQLException{
+        final String url="jdbc:mysql://localhost:3306/hotalDb";
+        final String userName = "root";
+        final String password = "nevermind";
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Driver load secefuly");
@@ -66,7 +71,7 @@ public class JDBC_hotalregervationDatabaseOparetion {
                 System.out.println("Room No : "+rs.getInt("room_no"));
                 System.out.println("Guest name : "+rs.getString("guest_name"));
                 System.out.println("Guest comtect no : "+rs.getString("contect_no"));
-                System.out.println("Reservation Date : "+rs.getDate("reservation_date"));
+                System.out.println("Reservation Date : "+rs.getTimestamp("reservation_date"));
                 System.out.println();
                 System.out.println("------------------------------------------");
             }
@@ -146,6 +151,7 @@ public class JDBC_hotalregervationDatabaseOparetion {
         try {
             stam.close();
             con.close();
+            sc.close();
             System.out.print("System is exiting ");
             for (int i=0;i<5;i++){
                 System.out.print(".");
